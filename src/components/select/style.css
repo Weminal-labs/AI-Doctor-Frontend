@@ -1,0 +1,13 @@
+.select {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+  appearance: none;
+}
+
+select option {
+  cursor: pointer;
+}
