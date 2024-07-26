@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 
 // Import layouts
 import MainLayout from "src/layouts/MainLayout";
+import DashboardLayout from "src/layouts/DashboardLayout";
 
 // Import pages
 import HomePage from "src/pages/home";
@@ -23,12 +24,18 @@ export const BASE_ROUTES: Array<RouteObject> = [
         element: <HomePage />,
       },
       {
-        path: RouteNames.chat.path,
-        element: <ChatPage />,
-      },
-      {
         path: "/",
         element: <Navigate to={RouteNames.home.path} replace />,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: RouteNames.chat.path,
+        element: <ChatPage />,
       },
     ],
   },

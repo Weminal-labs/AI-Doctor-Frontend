@@ -85,7 +85,7 @@ export class ButtonUtils {
         " bg-on-background/50 focus:non-on-background text-on-background/50"
       );
 
-    if (!type) return className;
+    if (type === "none") return className;
     return (
       className +
       " " +

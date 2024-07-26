@@ -1,3 +1,6 @@
+// Import from utils
+import { BooleanUtils } from "../utils/boolean";
+
 /*
   IDEA
   This `Theme` will be used with tailwindcss, there are 2 steps we need to do:
@@ -107,6 +110,53 @@ export class Theme {
   }
 
   /**
+   * Get a brightness' collection of `color`, `color` is the brightest color. There are 10 colors
+   * in collection.
+   * @param color
+   * @returns
+   */
+  static getBrightnessCollectionOf(color: string) {
+    const reg = /^(\d{1,3})(?:,{0,1})\s*(\d{1,3})(?:,{0,1})\s*(\d{1,3})$/;
+    const result = color.match(reg);
+
+    if (BooleanUtils.isFalsy(result)) {
+      console.warn(`The color \`${color}\` isn't a valid RGB format`);
+      return null;
+    }
+
+    const red = parseInt(result[1]),
+      green = parseInt(result[2]),
+      blue = parseInt(result[3]),
+      from = 100,
+      to = 10,
+      step = 10,
+      rRate = (red / 255) * step,
+      gRate = (green / 255) * step,
+      bRate = (blue / 255) * step,
+      colors = [{ brightness: from, value: color }];
+    let prevRed = red,
+      prevGreen = green,
+      prevBlue = blue;
+
+    for (let i = from; i > to; i -= step) {
+      prevRed = Math.trunc(prevRed - rRate);
+      prevGreen = Math.trunc(prevGreen - gRate);
+      prevBlue = Math.trunc(prevBlue - bRate);
+
+      prevRed = prevRed < 0 ? 0 : prevRed;
+      prevGreen = prevGreen < 0 ? 0 : prevGreen;
+      prevBlue = prevBlue < 0 ? 0 : prevBlue;
+
+      colors.push({
+        brightness: i - step,
+        value: `${prevRed} ${prevGreen} ${prevBlue}`,
+      });
+    }
+
+    return colors;
+  }
+
+  /**
    * Use this static method to get a set of CSS Variables Template to set up in
    * `tailwind.config.ts`
    */
@@ -118,17 +168,16 @@ export class Theme {
       const cssVariableName = `--color-${actualName}`;
 
       // RGB will be used, because it's more flexible than HEX
-      for (let i = 0; i <= 100; i += 10) {
+      for (let i = 10; i <= 100; i += 10) {
         if (!result[actualName]) result[actualName] = {};
         if (i === 100) {
-          result[actualName]["DEFAULT"] = `rgba(var(${cssVariableName}), ${
-            i / 100
-          })`;
+          result[actualName]["DEFAULT"] = `rgb(var(${cssVariableName}))`;
           continue;
         }
-        result[actualName][i] = `rgba(var(${cssVariableName}), ${i / 100})`;
+        result[actualName][i] = `rgb(var(${cssVariableName}-${i}))`;
       }
     }
+
     return result;
   }
 
@@ -160,25 +209,38 @@ export class Theme {
       if (!__ThemePropertyNames[colorName as keyof typeof colors]) continue;
 
       const actualName = __ThemePropertyNames[
-        colorName as ThemePropertyNames
-      ] as ThemePropertyNames;
+          colorName as ThemePropertyNames
+        ] as ThemePropertyNames,
+        collection = Theme.getBrightnessCollectionOf(
+          colors[colorName as keyof typeof colors]
+        );
+
+      if (!collection) {
+        console.warn(
+          "The brightness collection of " +
+            colors[colorName as keyof typeof colors] +
+            " doen't exists"
+        );
+        continue;
+      }
 
       if (!actualName) {
-        console.error(
+        console.warn(
           `The name - ${colorName} that you assigned isn't a valid name`
         );
         continue;
       }
 
-      const cssVariableName = `--color-${actualName}`;
+      for (const color of collection) {
+        const cssVariableName =
+          color.brightness === 100
+            ? `--color-${actualName}`
+            : `--color-${actualName}-${color.brightness}`;
 
-      cssClassContent = cssClassContent.slice(0, cssClassContent.length - 1);
-      cssClassContent =
-        cssClassContent +
-        cssVariableName +
-        ": " +
-        colors[colorName as keyof typeof colors] +
-        "; }";
+        cssClassContent = cssClassContent.slice(0, cssClassContent.length - 1);
+        cssClassContent =
+          cssClassContent + cssVariableName + ": " + color.value + "; }";
+      }
     }
 
     theme.themeSchemeCSSClasses.set(scheme, cssClassContent);
