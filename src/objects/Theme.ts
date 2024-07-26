@@ -142,6 +142,11 @@ export class Theme {
       prevRed = Math.trunc(prevRed - rRate);
       prevGreen = Math.trunc(prevGreen - gRate);
       prevBlue = Math.trunc(prevBlue - bRate);
+
+      prevRed = prevRed < 0 ? 0 : prevRed;
+      prevGreen = prevGreen < 0 ? 0 : prevGreen;
+      prevBlue = prevBlue < 0 ? 0 : prevBlue;
+
       colors.push({
         brightness: i - step,
         value: `${prevRed} ${prevGreen} ${prevBlue}`,

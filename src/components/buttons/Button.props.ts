@@ -8,7 +8,7 @@ export type Button_Types =
   | "rounded"
   | "full_rounded"
   | "non_padding";
-export type Button_ColorTypes = ThemePropertyNames;
+export type Button_ColorTypes = ThemePropertyNames | "none";
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   buttonType?: Button_Types;
