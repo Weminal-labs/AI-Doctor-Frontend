@@ -11,13 +11,13 @@ import NavigationPane from "src/components/navigation_pane";
 export default function DashboardLayout() {
   return (
     <>
-      <section className="float-left w-[25%] h-screen bg-background-10">
+      <section className="float-left w-[25%] h-screen bg-background-10 max-[1140px]:hidden">
         <header className="m-6 p-6 outline outline-1 outline-on-background-10 rounded-xl bg-background">
           <h1 className="font-semibold text-xl">Aptopus</h1>
         </header>
         <NavigationPane />
       </section>
-      <section className="float-right w-[75%] h-screen py-6 bg-background">
+      <section className="float-right w-[75%] h-screen py-6 bg-background max-[1140px]:w-full">
         <Outlet />
       </section>
     </>
