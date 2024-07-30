@@ -11,7 +11,7 @@ export default function ChatPage() {
   return (
     <div className="flex w-full h-full outline outline-1 outline-on-background-10 rounded-bl-xl rounded-tl-xl bg-background">
       {/* Chat Section */}
-      <section className="w-[65%] min-w-[620px] max-[1280px]:w-full">
+      <section className="flex flex-col w-[65%] min-w-[620px] max-[1280px]:w-full">
         <MessageScrollBox
           renderAnswer={AnwserBox}
           renderQuestion={QuestionBox}

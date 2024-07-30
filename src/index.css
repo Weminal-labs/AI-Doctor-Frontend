@@ -7,6 +7,14 @@
 
 :root {
   font-family: "Inter";
+
+  /* Some var */
+  --gradient-1: linear-gradient(
+    30deg,
+    rgb(var(--color-first)),
+    rgb(var(--color-second)),
+    rgb(var(--color-third))
+  );
 }
 
 * {
@@ -18,4 +26,16 @@
 
 ::-ms-reveal {
   filter: invert(100%);
+}
+
+.text-gradient-1 {
+  display: inline-block;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background: var(--gradient-1);
+  background-clip: text;
+}
+
+.bg-gradient-1 {
+  background: var(--gradient-1);
 }
