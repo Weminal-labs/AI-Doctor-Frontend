@@ -10,7 +10,7 @@ import type { TextInputProps } from "src/types/form";
 const askBoxConfig: TextInputProps = {
   elementType: "input",
   containerClassName:
-    "[&>div]:outline-0 [&>div]:focus-within:outline-none [&>div]:mt-0 [&>div]:rounded-xl [&>div]:bg-background-50 [&>div>input]:py-2 p-6",
+    "[&>div]:outline-0 [&>div]:focus-within:outline-none [&>div]:mt-0 [&>div]:rounded-xl [&>div]:bg-background-50 [&>div>input]:py-2 px-6",
   right: (
     <Button className="flex w-fit px-8 ms-6">
       <span className="material-symbols-outlined ms-2">send</span>
@@ -24,7 +24,7 @@ const askBoxConfig: TextInputProps = {
 
 export default function AskBox() {
   return (
-    <form id="ask">
+    <form className="absolute bottom-6 w-full" id="ask">
       <Input {...askBoxConfig} />
     </form>
   );

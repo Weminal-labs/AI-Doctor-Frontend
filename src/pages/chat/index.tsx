@@ -9,9 +9,9 @@ import QuestionBox from "./components/QuestionBox";
 
 export default function ChatPage() {
   return (
-    <div className="flex w-full h-full outline outline-1 outline-on-background-10 rounded-bl-xl rounded-tl-xl bg-background">
+    <div className="flex w-full h-full border border-on-background-10/50 rounded-bl-xl rounded-tl-xl bg-background">
       {/* Chat Section */}
-      <section className="flex flex-col w-[65%] min-w-[620px] max-[1280px]:w-full">
+      <section className="relative flex flex-col w-[65%] min-w-[620px] max-[1280px]:w-full">
         <MessageScrollBox
           renderAnswer={AnwserBox}
           renderQuestion={QuestionBox}
@@ -20,7 +20,7 @@ export default function ChatPage() {
       </section>
 
       {/* Another Section, that use to build some future feature: History of Chat, Organize Chats */}
-      <div className="w-[35%] outline outline-1 outline-on-background-10 max-[1280px]:hidden"></div>
+      <div className="w-[35%] border-l border-on-background-10/50 max-[1280px]:hidden"></div>
     </div>
   );
 }

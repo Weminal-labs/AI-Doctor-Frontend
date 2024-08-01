@@ -39,3 +39,25 @@
 .bg-gradient-1 {
   background: var(--gradient-1);
 }
+
+/* Scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-background-10));
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-on-background-10));
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  cursor: grab;
+  background: #555;
+}

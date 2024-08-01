@@ -18,7 +18,7 @@ export default function NavigationPane() {
   const location = useLocation();
 
   return (
-    <div className="m-6 py-6 bg-background outline outline-1 outline-on-background-10 rounded-xl h-[calc(100dvh-calc(5*24px)-28px)]">
+    <div className="m-6 py-6 bg-background border border-on-background-10/50 rounded-xl h-[calc(100dvh-calc(5*24px)-28px)]">
       <nav className="flex flex-col pe-6">
         {routeNamekeys.map((key) => {
           if (RouteNames[key].canHideFromHeader) return null;
