@@ -1,8 +1,11 @@
 import React from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 // Import types
 import type { Components } from "react-markdown";
+import CodeExecBox from "src/pages/chat/components/CodeExecBox";
+import CopyCodeButton from "src/pages/chat/components/CopyCodeButton";
 
 type TextHeaderType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 type ListType = "ul" | "ol";
@@ -71,21 +74,49 @@ function Code({
   className: string;
 }) {
   // return React.createElement("code", { children, className: className + " block rounded bg-outline/10 px-4 py-3" });
+  
   const match = /language-(\w+)/.exec(className || "");
   const lang = match![1];
   return (
-    <SyntaxHighlighter
-      showLineNumbers
-      language={lang}
-      customStyle={{
-        borderRadius: "8px",
-        background: "rgba(var(--color-outline), .2)",
-        marginTop: "1rem",
-        marginBottom: "1rem",
-      }}
-    >
-      {children}
-    </SyntaxHighlighter>
+    <div className="relative w-full">
+      <div className="flex flex-row items-center justify-between h-10 rounded-t-lg bg-[#282732] w-full absolute top-0 px-6 ">
+        <div className="flex flex-row items-center gap-x-2">
+          {["#27C93F", "#FF5F56", "#FFBD2E"].map(function (color: string) {
+            return (
+              <div className={"h-3 w-3 rounded-full"} style={{backgroundColor: `${color}`}}/>
+            )
+          })}
+        </div>
+        
+        <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center ms-4 cursor-pointer">
+            <span className="material-symbols-outlined">terminal</span>
+            <div className="text-sm ms-2">{lang}</div>
+          </div>
+          <CopyCodeButton text={children as string}/>
+        </div>
+        
+      </div>
+
+      <SyntaxHighlighter
+        showLineNumbers
+        language={lang}
+        style={atomDark}
+        customStyle={{
+          borderRadius: "8px",
+          background: "#0F0E1B",
+          marginTop: "1rem",
+          marginBottom: "1rem",
+          padding: "1.5rem",
+          paddingTop: "4rem",
+          borderColor: "#282732",
+          borderWidth: "2px"
+        }}
+        children={children}
+      />
+
+      <CodeExecBox />
+    </div>
   );
 }
 
