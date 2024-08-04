@@ -8,7 +8,7 @@ import { MDComponents } from "./_components";
 import type { MDContentProps } from "./type";
 
 export default function MDContent(props: MDContentProps) {
-  const [content, setContent] = React.useState("");
+  // const [content, setContent] = React.useState("");
 
   // Detect change of content
   React.useEffect(function () {}, [props.children]);
@@ -22,5 +22,5 @@ export default function MDContent(props: MDContentProps) {
     );
   }
 
-  return <ReactMarkdown components={MDComponents}>{content}</ReactMarkdown>;
+  return <ReactMarkdown components={MDComponents}>{props.children}</ReactMarkdown>;
 }

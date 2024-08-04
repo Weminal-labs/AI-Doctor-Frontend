@@ -25,7 +25,7 @@ const askBoxConfig: TextInputProps = {
 export default function AskBox() {
   return (
     <form
-      className="flex justify-center items-center w-full h-[15%] bg-background rounded-bl-xl"
+      className="flex justify-center items-center w-full h-[15%] bg-background rounded-bl-xl relative z-10"
       id="ask"
     >
       <Input {...askBoxConfig} />

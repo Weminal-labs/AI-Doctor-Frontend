@@ -1,24 +1,23 @@
-// import React from "react";
+import AnwserBox from "./AnwserBox";
+import ChatBoxOuter from "./ChatBoxOuter";
+import QuestionBox from "./QuestionBox";
 
 export default function MessageScrollBox(props: any) {
-  const BotMessage = (message: any) => (
-    <div className="bg-background-10 w-full inline-block py-3 px-6 mb-6">
-      <p>{message.value}</p>
-    </div>
-  );
-  const HumanMessage = (message: any) => (
-    <div className="bg-first-10/20 w-full inline-block py-3 px-6 mb-6">
-      <p>{message.value}</p>
-    </div>
-  );
-
   return (
     <section className="flex flex-col items-center h-full">
       <div className="h-full overflow-y-auto px-6 pt-6 pb-[124px]">
         {props.messages.map((message: any) => {
           if (message.sender === "bot")
-            return <BotMessage key={message.id} {...message} />;
-          return <HumanMessage key={message.id} {...message} />;
+            return (
+              <ChatBoxOuter key={message.id} className="bg-background-10 mt-14 mb-10">
+                <AnwserBox {...message} />
+              </ChatBoxOuter>
+            )
+          return (
+            <ChatBoxOuter key={message.id} className="bg-first-10/20 mt-16">
+              <QuestionBox {...message} />
+            </ChatBoxOuter>
+          );
         })}
       </div>
     </section>
