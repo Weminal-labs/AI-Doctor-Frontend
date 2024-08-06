@@ -12,10 +12,10 @@ const _baseButtonClassName =
   "flex mb-1 py-4 pe-6 ps-12 rounded-tr-lg rounded-br-lg text-lg";
 
 const _buttonClassNames = {
-  hover: _baseButtonClassName + " hover:bg-first-40 hover:text-on-first",
+  hover: _baseButtonClassName + " hover:bg-first-10/20 hover:text-on-first",
   focus:
     _baseButtonClassName +
-    " bg-gradient-to-r from-first to-second/50 outline outline-1 outline-on-background-10 focus:outline-none active:outline-none font-bold",
+    " bg-gradient-to-r from-first to-second/50 outline outline-1 outline-first focus:outline-none active:outline-none font-bold",
 };
 
 export default function NavigationPane() {
@@ -43,7 +43,14 @@ export default function NavigationPane() {
               colorType="none"
               onClick={() => navigate(RouteNames[key].path)}
             >
-              {RouteNames[key].name}
+              <div className="flex justify-center">
+                {RouteNames[key].ggIcon && (
+                  <span className="material-symbols-outlined me-6">
+                    {RouteNames[key].ggIcon}
+                  </span>
+                )}
+                <span>{RouteNames[key].name}</span>
+              </div>
             </Button>
           );
         })}
