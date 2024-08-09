@@ -17,7 +17,7 @@ export default function CloseButton(props: CloseButtonPropsType) {
     <Button
       colorType="first"
       buttonType="normal"
-      extendClassName="flex p-2 me-3 rounded lg:hidden"
+      className="flex p-2 me-3 rounded lg:hidden"
       onClick={() => props.close({ isAgree: props.isAgree ? true : false })}
     >
       <span className="material-symbols-outlined text-primary bg-on-primary">

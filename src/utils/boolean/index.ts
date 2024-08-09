@@ -1,9 +1,11 @@
 export class BooleanUtils {
-  static isTruthy<T>(data?: T): data is T {
+  static isTruthy<T>(data?: T | null): data is T {
     return !BooleanUtils.isFalsy(data);
   }
 
-  static isFalsy(data?: any) {
+  static isFalsy<T>(data?: T | null): data is null | undefined {
+    if (typeof data === "number" && data !== 0) return false;
+    if (typeof data === "string" && data !== "") return false;
     return !data;
   }
 

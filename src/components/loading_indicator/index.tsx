@@ -1,5 +1,3 @@
-import React from "react";
-
 // Locally Import
 import { LoadingIndicatorProps } from "./type";
 

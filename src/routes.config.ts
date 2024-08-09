@@ -1,6 +1,7 @@
 type RouteName = {
   path: string;
   name: string;
+  ggIcon?: string;
   canHideFromHeader?: boolean;
 };
 
@@ -11,10 +12,12 @@ export const RouteNames: { [K: string]: RouteName } = {
   home: {
     path: "/home",
     name: "Home",
+    ggIcon: "home",
   },
   chat: {
     path: "/chat",
     name: "Ask me",
+    ggIcon: "robot",
   },
   signup: {
     path: "/sign-up",

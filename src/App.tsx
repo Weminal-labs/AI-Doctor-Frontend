@@ -13,7 +13,7 @@ import Snackbar from "./components/modal_items/Snackbar";
 import { __ModalItemNames } from "./components/modal_items/utils";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(true);
+  const [isAuthenticated] = React.useState(true);
 
   React.useEffect(function () {
     NormalTheme.enable("dark");

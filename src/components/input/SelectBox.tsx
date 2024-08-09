@@ -10,7 +10,7 @@ import type { InputProps } from "src/types/form";
  * @returns
  */
 export default function SelectBox(
-  props: InputProps,
+  props: InputProps<HTMLInputElement>,
   ref: React.ForwardedRef<HTMLInputElement>
 ) {
   const { label, labelInputClassName } = props;
