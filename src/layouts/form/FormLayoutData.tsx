@@ -38,7 +38,7 @@ function FormGroupInput({ group }: { group: GroupInputsProps }) {
 function FormGroupChipInput({ group }: { group: GroupChipInputsProps }) {
   return (
     <div className="mb-4">
-      <p className="font-bold mb-1">{group.groupChipLabel}</p>
+      <p className="font-bold mb-1">{group.groupName}</p>
       <div className="chips-container">
         {group.chips.map((chip) => (
           <Input
@@ -126,7 +126,7 @@ export default function FormLayoutData(props: FormDataProps) {
             return <FormGroupInput key={group.baseName} group={group} />;
           },
           function (group) {
-            return <FormGroupChipInput key={group.baseName} group={group} />;
+            return <FormGroupChipInput key={group.groupName} group={group} />;
           },
           function (select) {
             return <Select key={select.elementAttributes.name} {...select} />;

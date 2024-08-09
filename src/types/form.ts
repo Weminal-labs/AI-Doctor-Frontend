@@ -25,10 +25,10 @@ export type FormElementProps = {
 export type InputProps<Attrs> = FormElementProps & {
   label?: _Content;
   labelInputClassName?: string;
-  elementAttributes?: Attrs;
+  elementAttributes: Attrs;
 };
 
-export type ChipInputProps = InputProps<undefined> & {
+export type ChipInputProps = InputProps<_CustomHTMLInputAttributes> & {
   nonPadding?: boolean;
   shape?: string;
   value: string;
@@ -61,16 +61,18 @@ export type SelectProps = InputProps<
 // Group Type
 //
 export type GroupInputsProps = FormElementProps & {
+  groupName: string;
   baseName: string;
   inputs: Array<TextInputProps>;
 };
 
 export type GroupChipInputsProps = FormElementProps & {
-  groupChipLabel: string;
+  groupName: string;
   chips: Array<ChipInputProps>;
 };
 
 export type GroupSelectProps = FormElementProps & {
+  groupName: string;
   baseName: string;
   selects: Array<SelectProps>;
 };
@@ -81,8 +83,9 @@ export type GroupSelectProps = FormElementProps & {
 export type FormPromptDataProps = {
   [key: string]:
     | TextInputProps
-    | GroupInputsProps
     | ChipInputProps
     | SelectProps
+    | GroupInputsProps
+    | GroupChipInputsProps
     | GroupSelectProps;
 };

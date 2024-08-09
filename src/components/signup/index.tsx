@@ -1,11 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 // Import apis
-import { Auth_API } from "src/apis";
+// import { Auth_API } from "src/apis";
 
 // Import utils
-import { BrowserStorageUtils } from "src/utils/browser_storage";
+// import { BrowserStorageUtils } from "src/utils/browser_storage";
 
 // Import layouts
 import FormLayoutData from "src/layouts/form/FormLayoutData";
@@ -13,13 +13,13 @@ import FormLayoutData from "src/layouts/form/FormLayoutData";
 // Import components
 import Button from "../buttons/Button";
 import LoadingIndicator from "../loading_indicator";
-import { openSnackbar } from "../modal_items/utils";
+// import { openSnackbar } from "../modal_items/utils";
 
 // Import form
 import { SignupForm } from "src/forms/signup";
 
 // Import route configs
-import { RouteNames } from "src/routes.config";
+// import { RouteNames } from "src/routes.config";
 
 // Import types
 import type { RegisterUser } from "src/objects/User";
@@ -27,7 +27,7 @@ import type { FormPromptDataProps } from "src/types/form";
 
 export default function Signup() {
   const [isSigningup, setIsSigningup] = React.useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const __FormContentData__ = React.useMemo(function () {
     return SignupForm as any as FormPromptDataProps;
   }, []);
@@ -47,26 +47,26 @@ export default function Signup() {
 
         setIsSigningup(true);
 
-        Auth_API.signupAsync(registra).then((result) => {
-          let message = "";
-          let snackbarHeaderColor = "";
-          if (result.error) {
-            message = result.error.message as string;
-            snackbarHeaderColor = "error";
-          }
+        // Auth_API.signupAsync(registra).then((result) => {
+        //   let message = "";
+        //   let snackbarHeaderColor = "";
+        //   if (result.error) {
+        //     message = result.error.message as string;
+        //     snackbarHeaderColor = "error";
+        //   }
 
-          if (result.success) {
-            message = result.success.message as string;
-            snackbarHeaderColor = "success";
-            BrowserStorageUtils.setTempItem("username", formData.username);
-          }
+        //   if (result.success) {
+        //     message = result.success.message as string;
+        //     snackbarHeaderColor = "success";
+        //     BrowserStorageUtils.setTempItem("username", formData.username);
+        //   }
 
-          openSnackbar({
-            headerColor: snackbarHeaderColor as any,
-            content: message,
-          });
-          if (result.success) navigate(RouteNames.activateAccount.path);
-        });
+        //   openSnackbar({
+        //     headerColor: snackbarHeaderColor as any,
+        //     content: message,
+        //   });
+        //   if (result.success) navigate(RouteNames.activateAccount.path);
+        // });
       }}
       actionElements={
         <Button
