@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 // Import apis
-import { Auth_API } from "src/apis";
+// import { Auth_API } from "src/apis";
 
 // Import utils
 import { BrowserStorageUtils } from "src/utils/browser_storage";
@@ -35,8 +35,8 @@ export default function ActivateAccount() {
     <FormLayoutData
       className="block max-w-sm w-full"
       data={__FormContentData__}
-      handleOnSubmit={function (formData) {
-        const { code } = formData;
+      handleOnSubmit={function () {
+        // const { code } = formData;
         const username = BrowserStorageUtils.getTempItem<string>("username");
 
         if (!username) {
@@ -50,31 +50,31 @@ export default function ActivateAccount() {
 
         setIsActivating(true);
 
-        Auth_API.activateAccountAsync({ username, code }).then((result) => {
-          let message = "";
-          let snackbarHeaderColor = "";
-          if (result.error) {
-            message = result.error.message as string;
-            snackbarHeaderColor = "error";
-          }
+        // Auth_API.activateAccountAsync({ username, code }).then((result) => {
+        //   let message = "";
+        //   let snackbarHeaderColor = "";
+        //   if (result.error) {
+        //     message = result.error.message as string;
+        //     snackbarHeaderColor = "error";
+        //   }
 
-          if (result.success) {
-            message = result.success.message as string;
-            snackbarHeaderColor = "success";
-          }
+        //   if (result.success) {
+        //     message = result.success.message as string;
+        //     snackbarHeaderColor = "success";
+        //   }
 
-          openSnackbar({
-            headerColor: snackbarHeaderColor as any,
-            content: message,
-          });
-          navigate("/");
-          setIsActivating(false);
-        });
+        //   openSnackbar({
+        //     headerColor: snackbarHeaderColor as any,
+        //     content: message,
+        //   });
+        //   navigate("/");
+        //   setIsActivating(false);
+        // });
       }}
       actionElements={
         <Button
           key="submit"
-          extendClassName="flex items-center justify-center w-full"
+          className="flex items-center justify-center w-full"
           type="submit"
           disabled={isActivating}
         >

@@ -20,15 +20,15 @@ function _Input(
   props: ChipInputProps | TextInputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) {
-  switch (props.type) {
+  switch (props.elementAttributes ? props.elementAttributes.type : "") {
     case "chip":
     case "radio-chip": {
-      return <_ChipInput {...props} ref={ref} />;
+      return <_ChipInput {...(props as ChipInputProps)} ref={ref} />;
     }
 
     case "checkbox":
     case "radio": {
-      return <_SelectBox {...props} ref={ref} />;
+      return <_SelectBox {...(props as any)} ref={ref} />;
     }
 
     case "button":

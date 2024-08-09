@@ -7,14 +7,20 @@ export default function Chip(
   props: ChipInputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) {
-  let { label, labelInputClassName, className, nonPadding, shape, type } =
-    props;
-  type =
-    props.type === "chip"
-      ? "checkbox"
-      : props.type === "radio-chip"
-      ? "radio"
-      : "";
+  const { label, labelInputClassName, nonPadding, shape } = props;
+  const className =
+    "input-chip" +
+    (props.elementAttributes.className
+      ? " " + props.elementAttributes.className
+      : "");
+  let type = "checkbox";
+
+  if (
+    props.elementAttributes &&
+    props.elementAttributes.type === "radio-chip"
+  ) {
+    type = "radio";
+  }
 
   if (type === "") {
     console.warn("Chip must be have specific type: chip or radio-chip");
@@ -28,15 +34,18 @@ export default function Chip(
   if (shape) checkClassName += " " + shape;
   else checkClassName += " " + "rounded";
 
-  className = "input-chip";
-
   return (
     <label
       className={`label-input-chip${
         labelInputClassName ? " " + labelInputClassName : ""
       }`}
     >
-      <input ref={ref} {...props} className={className} type={type} />
+      <input
+        ref={ref}
+        {...props.elementAttributes}
+        className={className}
+        type={type}
+      />
       <span className={checkClassName}>
         {label && typeof label === "function" && label()}
         {label &&
