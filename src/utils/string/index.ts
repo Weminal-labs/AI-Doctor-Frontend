@@ -34,6 +34,28 @@ function concate(
   }
 }
 
+/**
+ * Get valid path for URL
+ * @param strs
+ * @returns
+ */
+function getPath(...strs: Array<string>) {
+  let result = "";
+
+  for (let i = 0; i < strs.length; i++) {
+    let str = strs[i];
+    if (str[0] !== "/") str = "/" + str;
+    result += str;
+  }
+
+  result = result.replaceAll(/\/+/g, "/");
+
+  if (result[0] !== "/") return "/" + result;
+
+  return result;
+}
+
 export const StringUtils = {
   concate,
+  getPath,
 };
