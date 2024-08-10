@@ -2,10 +2,12 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
 // Import slices
 import { ThemeSlice } from "./theme";
+import { ConversationSlice } from "./conversation";
 
 // Central Reducer.
 const reducers = combineReducers({
   [ThemeSlice.name]: ThemeSlice.reducer,
+  [ConversationSlice.name]: ConversationSlice.reducer,
 });
 
 /**

@@ -1,5 +1,8 @@
 import axios from "axios";
 
+// Import from utils
+import { StringUtils } from "src/utils/string";
+
 // Import types
 import type {
   Axios,
@@ -26,9 +29,9 @@ type _KindOfOnFulfilled = {
   ) => AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>;
 };
 
-let _instance: APIManager | null = null;
+let _instance: API | null = null;
 
-export class APIManager {
+export class API {
   private _http!: Axios;
 
   constructor(config: AxiosRequestConfig) {
@@ -38,6 +41,15 @@ export class APIManager {
 
     // Place this in the last line
     _instance = this;
+  }
+
+  /**
+   * Get valid URL
+   * @param paths
+   * @returns
+   */
+  private _getURL(...paths: Array<string>) {
+    return StringUtils.getPath(this._http.defaults.baseURL || "", ...paths);
   }
 
   /**
@@ -81,13 +93,16 @@ export class APIManager {
 
   /**
    * Make a HTTP Get request
-   * @param url
+   * @param path
    * @param config
    * @returns
    */
-  async get<ResponseData>(url: string, config: AxiosRequestConfig) {
+  async get<ResponseData>(path: string, config?: AxiosRequestConfig) {
     try {
-      const response = await this._http.get<ResponseData>(url, config);
+      const response = await this._http.get<ResponseData>(
+        this._getURL(path),
+        config
+      );
       return response;
     } catch (e: any) {
       console.warn(e.message);
@@ -96,17 +111,21 @@ export class APIManager {
 
   /**
    * Make a HTTP Post request
-   * @param url
+   * @param path
    * @param config
    * @returns
    */
   async post<Payload, ResponseData>(
-    url: string,
+    path: string,
     data: Payload,
-    config: AxiosRequestConfig
+    config?: AxiosRequestConfig
   ) {
     try {
-      const response = await this._http.post<ResponseData>(url, data, config);
+      const response = await this._http.post<ResponseData>(
+        this._getURL(path),
+        data,
+        config
+      );
       return response;
     } catch (e: any) {
       console.warn(e.message);
@@ -115,18 +134,22 @@ export class APIManager {
 
   /**
    * Make a HTTP Put request
-   * @param url
+   * @param path
    * @param data
    * @param config
    * @returns
    */
   async put<Payload, ResponseData>(
-    url: string,
+    path: string,
     data: Payload,
-    config: AxiosRequestConfig
+    config?: AxiosRequestConfig
   ) {
     try {
-      const response = await this._http.put<ResponseData>(url, data, config);
+      const response = await this._http.put<ResponseData>(
+        this._getURL(path),
+        data,
+        config
+      );
       return response;
     } catch (e: any) {
       console.warn(e.message);
@@ -135,18 +158,22 @@ export class APIManager {
 
   /**
    * Make a HTTP Patch request
-   * @param url
+   * @param path
    * @param data
    * @param config
    * @returns
    */
   async patch<Payload, ResponseData>(
-    url: string,
+    path: string,
     data: Payload,
-    config: AxiosRequestConfig
+    config?: AxiosRequestConfig
   ) {
     try {
-      const response = await this._http.patch<ResponseData>(url, data, config);
+      const response = await this._http.patch<ResponseData>(
+        this._getURL(path),
+        data,
+        config
+      );
       return response;
     } catch (e: any) {
       console.warn(e.message);
@@ -155,14 +182,17 @@ export class APIManager {
 
   /**
    * Make a HTTP Delete request
-   * @param url
+   * @param path
    * @param data
    * @param config
    * @returns
    */
-  async delete<ResponseData>(url: string, config: AxiosRequestConfig) {
+  async delete<ResponseData>(path: string, config?: AxiosRequestConfig) {
     try {
-      const response = await this._http.delete<ResponseData>(url, config);
+      const response = await this._http.delete<ResponseData>(
+        this._getURL(path),
+        config
+      );
       return response;
     } catch (e: any) {
       console.warn(e.message);
