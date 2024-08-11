@@ -4,24 +4,24 @@
 // Import components
 import AnwserBox from "./components/AnwserBox";
 import AskBox from "./components/AskBox";
-import ChatHeader from "./components/ChatHeader";
+import ConversationHeader from "./components/ConversationHeader";
 import MessageScrollBox from "./components/MessageScrollBox";
 import QuestionBox from "./components/QuestionBox";
-import ChatWelcome from "./components/ChatWelcome";
+import ConversationWelcome from "./components/ConversationWelcome";
 
 // Import mock data
 import MessagesData from "src/assets/mock/messages.json";
 
-export default function ChatPage() {
+export default function ConversationPage() {
   const messages = MessagesData;
 
   return (
     <div className="flex w-full h-full border border-on-background-10/50 rounded-bl-xl rounded-tl-xl bg-background">
-      {/* Chat Section */}
+      {/* Conversation Section */}
       <section className="relative flex flex-col w-[65%] min-w-[620px] h-full max-[1280px]:w-full">
         {messages && messages.length > 0 ? (
           <div className="h-[85%]">
-            <ChatHeader />
+            <ConversationHeader />
             <MessageScrollBox
               messages={messages}
               renderAnswer={AnwserBox}
@@ -29,7 +29,7 @@ export default function ChatPage() {
             />
           </div>
         ) : (
-          <ChatWelcome />
+          <ConversationWelcome />
         )}
         <AskBox />
       </section>

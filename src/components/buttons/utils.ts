@@ -82,7 +82,7 @@ export class ButtonUtils {
     if (BooleanUtils.isTruthy(isDisable))
       return (
         className +
-        " bg-on-background/50 focus:non-on-background text-on-background/50"
+        " cursor-default bg-on-background/90 focus:non-on-background text-on-background/50"
       );
 
     if (type === "none") return className;

@@ -14,8 +14,8 @@ export const RouteNames: { [K: string]: RouteName } = {
     name: "Home",
     ggIcon: "home",
   },
-  chat: {
-    path: "/chat",
+  conversation: {
+    path: "/conversation",
     name: "Ask me",
     ggIcon: "robot",
   },
