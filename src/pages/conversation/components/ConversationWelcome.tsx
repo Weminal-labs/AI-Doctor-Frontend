@@ -6,7 +6,7 @@ import Button from "src/components/buttons/Button";
 // Import mock data
 import ExampleQuestionsData from "src/assets/mock/example_questions.json";
 
-export default function ChatWelcome() {
+export default function ConversationWelcome() {
   return (
     <div className="w-full flex flex-col items-center mt-[98px]">
       <h1 className="text-5xl font-bold max-w-[376px]">

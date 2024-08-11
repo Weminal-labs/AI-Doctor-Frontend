@@ -4,3 +4,8 @@ export type RouteData = {
   Element: JSX.Element | (() => JSX.Element);
   children?: Array<RouteData>;
 };
+
+export type LocalStateManager<InitialStateGetter, StateFnsGetter> = {
+  getInitialState: InitialStateGetter;
+  getStateFns: StateFnsGetter;
+};

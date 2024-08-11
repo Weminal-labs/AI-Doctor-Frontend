@@ -6,7 +6,7 @@ import DashboardLayout from "src/layouts/DashboardLayout";
 
 // Import pages
 import HomePage from "src/pages/home";
-import ChatPage from "src/pages/chat";
+import ConversationPage from "src/pages/conversation";
 
 // Import routes configuration
 import { RouteNames } from "src/routes.config";
@@ -34,8 +34,8 @@ export const BASE_ROUTES: Array<RouteObject> = [
     element: <DashboardLayout />,
     children: [
       {
-        path: RouteNames.chat.path,
-        element: <ChatPage />,
+        path: RouteNames.conversation.path,
+        element: <ConversationPage />,
       },
     ],
   },
