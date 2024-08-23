@@ -9,14 +9,14 @@ import ConversationAvatar from "./ConversationAvatar";
 
 export default function AnwserBox(message: any) {
   return (
-    <div>
+    <div key={message.id}>
       <ConversationBoxOuter className="bg-first-10/10 mt-16 mb-3">
         <div>
           <ConversationAvatar
             src="https://th.bing.com/th/id/OIP.HNtNQPGaihircRCA63VPeAHaHa?pid=ImgDet&w=178&h=178&c=7"
             className="absolute -top-8"
           />
-          <MDContent>{message.value}</MDContent>
+          <MDContent>{message.content}</MDContent>
         </div>
       </ConversationBoxOuter>
       <div className="flex flex-row items-center">

@@ -8,22 +8,14 @@ import { conversationSelector } from "src/states/redux/conversation";
 
 // Import types
 import type { AppDispatch } from "src/states/redux";
+import type { Dialog } from "src/objects/conversation/types";
 
 export const { useConversation, useConversationActions, useConversationState } =
   (function () {
     const createDispatchers = function (dispatch: AppDispatch) {
       return {
-        getConversation() {
-          dispatch(ConversationActions.getConversation(""));
-        },
-        getCurrentConversation() {
-          dispatch(ConversationActions.getCurrentConversation(""));
-        },
-        saveConversation() {
-          dispatch(ConversationActions.saveConversation(""));
-        },
-        deleteConversation() {
-          dispatch(ConversationActions.deleteConversation(""));
+        saveCurrentDialogs(dialogs: Array<Dialog>) {
+          dispatch(ConversationActions.saveCurrentDialogs(dialogs));
         },
       };
     };

@@ -6,10 +6,10 @@ import type {
 
 type _Content = (() => JSX.Element) | JSX.Element | string;
 type _CustomHTMLInputAttributes = Omit<
-  InputHTMLAttributes<HTMLInputElement>,
+  InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
   "type"
 > & {
-  type: HTMLInputTypeAttribute | "chip" | "radio-chip";
+  type: HTMLInputTypeAttribute | "text-area" | "chip" | "radio-chip";
 };
 
 export type FormElementProps = {

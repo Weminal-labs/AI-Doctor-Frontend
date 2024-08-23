@@ -8,13 +8,13 @@ import ConversationBoxOuter from "./ConversationBoxOuter";
 
 export default function QuestionBox(message: any) {
   return (
-    <ConversationBoxOuter className="bg-background-10 mt-14 mb-10">
+    <ConversationBoxOuter key={message.id} className="bg-background-10 mt-16">
       <div>
         <ConversationAvatar
-          src="https://anhgaixinh.vn/wp-content/uploads/2022/08/7_hinh-gai-xinh-cute-de-thuong-nhat-viet-nam.jpg"
+          src="https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/FPGDGYJXM56KI5CTHHDX3DN2WQ.jpg&w=1440"
           className="absolute -top-8 border-background"
         />
-        <MDContent>{message.value}</MDContent>
+        <MDContent>{message.content}</MDContent>
       </div>
     </ConversationBoxOuter>
   );

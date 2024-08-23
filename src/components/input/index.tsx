@@ -42,6 +42,7 @@ function _Input(
     }
 
     case "text":
+    case "text-area":
     case "number":
     case "password":
     case "email":

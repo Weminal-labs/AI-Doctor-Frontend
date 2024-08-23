@@ -14,7 +14,7 @@ import type { TextInputProps } from "src/types/form";
  */
 export default function TextInput(
   props: TextInputProps,
-  ref: React.ForwardedRef<HTMLInputElement>
+  ref: React.ForwardedRef<HTMLInputElement | HTMLTextAreaElement>
 ) {
   const {
     label,
@@ -51,7 +51,7 @@ export default function TextInput(
           <div className="flex">
             {left && typeof left === "function" ? left() : left}
             <input
-              ref={ref}
+              ref={ref as React.ForwardedRef<HTMLInputElement>}
               {...elementAttributes}
               className={
                 "bg-transparent focus:outline-none w-full " +
@@ -67,14 +67,25 @@ export default function TextInput(
     return (
       <div className={_containerClassName + " " + (containerClassName || "")}>
         {Label}
-        <input
-          ref={ref}
-          {...elementAttributes}
-          className={
-            "bg-transparent focus:outline-none w-full " +
-            ((elementAttributes && elementAttributes.className) || "")
-          }
-        />
+        {props.elementAttributes.type === "text-area" ? (
+          <textarea
+            ref={ref as React.ForwardedRef<HTMLTextAreaElement>}
+            {...elementAttributes}
+            className={
+              "bg-transparent focus:outline-none w-full " +
+              ((elementAttributes && elementAttributes.className) || "")
+            }
+          ></textarea>
+        ) : (
+          <input
+            ref={ref as React.ForwardedRef<HTMLInputElement>}
+            {...elementAttributes}
+            className={
+              "bg-transparent focus:outline-none w-full " +
+              ((elementAttributes && elementAttributes.className) || "")
+            }
+          />
+        )}
       </div>
     );
   }
@@ -85,14 +96,26 @@ export default function TextInput(
       {Label}
       <div className={_containerClassName + " flex mt-2"}>
         {left && typeof left === "function" ? left() : left}
-        <input
-          ref={ref}
-          {...elementAttributes}
-          className={
-            "bg-transparent focus:outline-none w-full " +
-            ((elementAttributes && elementAttributes.className) || "")
-          }
-        />
+        {props.elementAttributes.type === "text-area" ? (
+          <textarea
+            ref={ref as React.ForwardedRef<HTMLTextAreaElement>}
+            {...elementAttributes}
+            className={
+              "bg-transparent focus:outline-none w-full " +
+              ((elementAttributes && elementAttributes.className) || "")
+            }
+          ></textarea>
+        ) : (
+          <input
+            ref={ref as React.ForwardedRef<HTMLInputElement>}
+            {...elementAttributes}
+            className={
+              "bg-transparent focus:outline-none w-full " +
+              ((elementAttributes && elementAttributes.className) || "")
+            }
+          />
+        )}
+
         {right && typeof right === "function" ? right() : right}
       </div>
     </div>

@@ -2,31 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Import types
 import type { AppState } from "..";
+import type { Conversation, Dialog } from "src/objects/conversation/types";
 
 type ConversationState = {
   history: Map<string, Conversation>;
-  current: Conversation;
-};
-
-type Conversation = {
-  id: string;
-  content: Array<any>;
+  archivedLatestDialogs: Array<Dialog> | null;
 };
 
 export const ConversationSlice = createSlice({
   name: "conversation",
   initialState: {
     history: new Map(),
-    current: { id: "", content: [] },
+    archivedLatestDialogs: null,
   } as ConversationState,
   reducers: {
-    getConversation(state, action) {},
-
-    getCurrentConversation(state, action) {},
-
-    saveConversation(state, action) {},
-
-    deleteConversation(state, action) {},
+    saveCurrentDialogs(state, action) {
+      state.archivedLatestDialogs = action.payload;
+    },
   },
 });
 
