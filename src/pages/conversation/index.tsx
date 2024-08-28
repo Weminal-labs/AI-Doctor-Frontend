@@ -62,7 +62,7 @@ export default function ConversationPage() {
   return (
     <div className="flex w-full h-full border border-on-background-10/50 rounded-bl-xl rounded-tl-xl bg-background">
       {/* Conversation Section */}
-      <section className="relative flex flex-col justify-between w-[65%] min-w-[620px] h-full max-[1280px]:w-full">
+      <section className="relative flex flex-col justify-between w-[52%] min-w-[620px] h-full max-[1280px]:w-full">
         {hasDialog && <ConversationHeader title={state.headerTitle} />}
         {hasDialog ? (
           <DialogScrollBox
@@ -81,7 +81,13 @@ export default function ConversationPage() {
       </section>
 
       {/* Another Section, that use to build some future feature: History of Chat, Organize Chats */}
-      <div className="w-[35%] border-l border-on-background-10/50 max-[1280px]:hidden"></div>
+      <div className="w-[48%] border-l border-on-background-10/50 max-[1280px]:hidden p-6">
+        <div className="w-full h-full bg-background-10 rounded-xl p-6">
+          <header className="rounded-xl p-6 bg-background">
+            <p className="font-bold text">Processing logs</p>
+          </header>
+        </div>
+      </div>
     </div>
   );
 }

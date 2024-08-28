@@ -8,8 +8,7 @@ import Button from "../buttons/Button";
 // Import from routes config
 import { RouteNames } from "src/routes.config";
 
-const _baseButtonClassName =
-  "flex mb-1 py-4 pe-6 ps-12 rounded-tr-lg rounded-br-lg text-lg";
+const _baseButtonClassName = "flex justify-center mb-1 py-4 text-lg";
 
 const _buttonClassNames = {
   hover: _baseButtonClassName + " hover:bg-first-10/20 hover:text-on-first",
@@ -25,8 +24,8 @@ export default function NavigationPane() {
   const location = useLocation();
 
   return (
-    <div className="m-6 py-6 bg-background border border-on-background-10/50 rounded-xl h-[calc(100dvh-calc(5*24px)-28px)]">
-      <nav className="flex flex-col pe-6">
+    <div className="my-6 py-6 bg-background border border-on-background-10/50 rounded-xl h-[calc(100dvh-calc(5*24px)-28px)]">
+      <nav className="flex flex-col">
         {routeNamekeys.map((key) => {
           if (RouteNames[key].canHideFromHeader) return null;
 
@@ -43,14 +42,11 @@ export default function NavigationPane() {
               colorType="none"
               onClick={() => navigate(RouteNames[key].path)}
             >
-              <div className="flex justify-center">
-                {RouteNames[key].ggIcon && (
-                  <span className="material-symbols-outlined me-6">
-                    {RouteNames[key].ggIcon}
-                  </span>
-                )}
-                <span>{RouteNames[key].name}</span>
-              </div>
+              {RouteNames[key].ggIcon && (
+                <span className="material-symbols-outlined">
+                  {RouteNames[key].ggIcon}
+                </span>
+              )}
             </Button>
           );
         })}
