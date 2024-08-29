@@ -13,6 +13,7 @@ import { BooleanUtils } from "src/utils/boolean";
 import { ConversationUtils } from "../utils";
 
 // Import types
+import type { SocketClient } from "src/objects/socket";
 import type { TextInputProps } from "src/types/form";
 import type {
   USessionStatus,
@@ -24,6 +25,7 @@ type AskBoxProps = {
   sessionStatus: USessionStatus;
   addDialog: AddDialogFn;
   updateSessionStatus: UpdateSessionStatusFn;
+  socket: SocketClient;
 };
 
 const _buttonContents = {
@@ -100,6 +102,8 @@ export default function AskBox(props: AskBoxProps) {
             props.addDialog,
             props.updateSessionStatus
           );
+
+          props.socket.emit("receive_question", content);
         }}
       >
         <Input

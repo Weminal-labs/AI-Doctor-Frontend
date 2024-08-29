@@ -67,6 +67,7 @@ export default function CodeBlock({
           {["#27C93F", "#FF5F56", "#FFBD2E"].map(function (color: string) {
             return (
               <div
+                key={color}
                 className={"h-3 w-3 rounded-full"}
                 style={{ backgroundColor: `${color}` }}
               />

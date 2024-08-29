@@ -5,10 +5,12 @@ export default function DialogScrollBox(props: any) {
 
   React.useEffect(() => {
     if (scrollBoxElementRef.current) {
-      scrollBoxElementRef.current.scroll(
-        0,
-        scrollBoxElementRef.current.scrollHeight
-      );
+      setTimeout(() => {
+        scrollBoxElementRef.current!.scroll(
+          0,
+          scrollBoxElementRef.current!.scrollHeight
+        );
+      }, 10);
     }
   }, [scrollBoxElementRef.current, scrollBoxElementRef.current?.scrollHeight]);
 

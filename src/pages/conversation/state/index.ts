@@ -33,6 +33,22 @@ function getStateFns(changeState: ChangeStateFn<CodeBlockState>) {
         return [...data, { id: data.length, content, sender }];
       });
     },
+
+    appendChunkToLastDialog(chunk: string, sender: USenders) {
+      changeState("dialogs", function (data) {
+        if (data === null) return [{ id: 0, content: chunk, sender }];
+
+        let lastDialog = data[data.length - 1];
+
+        if (sender === lastDialog.sender) {
+          lastDialog.content += chunk;
+        } else {
+          data.push({ id: data.length, content: chunk, sender });
+        }
+
+        return data;
+      });
+    },
   };
 }
 

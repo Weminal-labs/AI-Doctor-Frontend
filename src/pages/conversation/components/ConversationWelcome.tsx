@@ -6,7 +6,11 @@ import Button from "src/components/buttons/Button";
 // Import mock data
 import ExampleQuestionsData from "src/assets/mock/example_questions.json";
 
-export default function ConversationWelcome() {
+export type ConversationWelcomeProps = {
+  ask(content: string): any;
+};
+
+export default function ConversationWelcome(props: ConversationWelcomeProps) {
   return (
     <div className="w-full flex flex-col items-center mt-[98px]">
       <h1 className="text-5xl font-bold max-w-[376px]">
@@ -18,6 +22,9 @@ export default function ConversationWelcome() {
             colorType="none"
             className="flex py-6 mb-3 w-full border border-1 border-on-background-10/50 justify-between items-center"
             key={question.value}
+            onClick={() => {
+              props.ask(question.value);
+            }}
           >
             <div className="flex items-center">
               <span className="material-symbols-outlined me-2 text-first">
