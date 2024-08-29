@@ -4,6 +4,9 @@ import React from "react";
 import { useConversation } from "src/hooks/useConversation";
 import { useStateManager } from "src/hooks/useStateManager";
 
+// Import from objects
+import { SocketClient } from "src/objects/socket";
+
 // Import from utils
 import { OtherUtils } from "src/utils/other";
 
@@ -31,25 +34,42 @@ export default function ConversationPage() {
   const [state, stateFns] = useStateManager(
     ConversationStateManager.getInitialState(
       conversation.archivedLatestDialogs
-        ? conversation.archivedLatestDialogs
-        : DialogsData
     ),
     ConversationStateManager.getStateFns
   );
 
+  const socket = React.useMemo(() => new SocketClient(), []);
+
   const hasDialog = state.sessionStatus !== "new";
 
-  // The bi-direction communication will be handled
-  // here with WebSocket
+  // Listener of socket will work here
+  React.useEffect(() => {
+    socket.listen("follow_up", function (data) {
+      console.log("Message from follow_up:", data);
+    });
+
+    socket.listen("answer_available", function (data) {
+      socket.emit("handle_answer", null);
+    });
+
+    socket.listen("answer", async function (data) {
+      // console.log("Answer:", data);
+      stateFns.appendChunkToLastDialog(data, "bot");
+    });
+
+    return function () {};
+  }, []);
+
+  // Emitter of socket will work here
   React.useEffect(() => {
     if (state.sessionStatus === "generating") {
-      OtherUtils.wait(2000).then(() => {
-        ConversationUtils.response(
-          "Your question is answered. Please, ask another question!",
-          stateFns.addDialog,
-          stateFns.updateSessionStatus
-        );
-      });
+      // OtherUtils.wait(2000).then(() => {
+      //   ConversationUtils.response(
+      //     "Your question is answered. Please, ask another question!",
+      //     stateFns.addDialog,
+      //     stateFns.updateSessionStatus
+      //   );
+      // });
     }
 
     // Save dialogs to archived
@@ -71,12 +91,21 @@ export default function ConversationPage() {
             renderQuestion={QuestionBox}
           />
         ) : (
-          <ConversationWelcome />
+          <ConversationWelcome
+            ask={(questionContent) => {
+              ConversationUtils.ask(
+                questionContent,
+                stateFns.addDialog,
+                stateFns.updateSessionStatus
+              );
+            }}
+          />
         )}
         <AskBox
           sessionStatus={state.sessionStatus}
           updateSessionStatus={stateFns.updateSessionStatus}
           addDialog={stateFns.addDialog}
+          socket={socket}
         />
       </section>
 
